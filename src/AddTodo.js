@@ -1,11 +1,15 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Button } from "react-native";
 
-export const AddTodo = (props) => {
+export const AddTodo = ({ onSubmit }) => {
+  const addTodo = () => {
+    onSubmit("new Tdod");
+  };
+
   return (
     <View style={styles.block}>
       <TextInput style={styles.input} />
-      <Button title="Добавить" />
+      <Button title="Добавить" onPress={addTodo} />
     </View>
   );
 };
