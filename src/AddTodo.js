@@ -1,14 +1,26 @@
-import React from "react";
-import { View, StyleSheet, TextInput, Button } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, TextInput, Button, Alert } from "react-native";
 
 export const AddTodo = ({ onSubmit }) => {
+  const [value, setValue] = useState("");
+
   const addTodo = () => {
-    onSubmit("new Tdod");
+    if (value.trim()) {
+      onSubmit(value);
+      setValue("");
+    } else {
+      Alert.alert("Поле с названием дела не может быть пустым!");
+    }
   };
 
   return (
     <View style={styles.block}>
-      <TextInput style={styles.input} />
+      <TextInput
+        style={styles.input}
+        onChangeText={(text) => setValue(text)}
+        value={value}
+        placeholder="Введите название дела..."
+      />
       <Button title="Добавить" onPress={addTodo} />
     </View>
   );
@@ -24,7 +36,7 @@ const styles = StyleSheet.create({
     width: "70%",
     margin: 2,
     borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "#3949ab",
+    borderBottomWidth: 2,
+    borderBottomColor: "#3949ab",
   },
 });
